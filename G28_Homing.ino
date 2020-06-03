@@ -1,4 +1,5 @@
 extern float PosXZ[];                          //Define external variaables
+extern float currentPosXZ[];                           //Declare external variables for use in this part of the script
 extern boolean AbsolutePos;
 const float XhomingSpeedInMMPerSec = 80.0;   
 const float ZhomingSpeedInMMPerSec = 10.0; 
@@ -13,6 +14,9 @@ boolean homex = false;
 
 void Home() {
 
+  stepperZ.setSpeedInMillimetersPerSecond(ZhomingSpeedInMMPerSec*0.1);
+  stepperX.setSpeedInMillimetersPerSecond(XhomingSpeedInMMPerSec*0.1);
+  
   AbsolutePos = true;                             //Set the absolute positioning to true to be able to go to the home position accurately (NOTE THAT IF ON RELATIVE MODE HOMING WILL OVERRIDE TO ABSOLUTE MODE)
   PosXZ[0] = 0;                                   //Set the position to the homing position and home the steppers
   PosXZ[1] = 0;
@@ -22,6 +26,8 @@ void Home() {
   //delay(500);
   if (homez && homex){
   Serial.println("Homed");  
+  currentPosXZ[0] = 0;                                   //Set the position to the homing position and home the steppers
+  currentPosXZ[1] = 0;
   }
   else{
   Serial.println("Failed");

@@ -1,5 +1,5 @@
 void StartCode(){
   Serial.println("start");
-  Serial.println("echo: XZ carriage 0.0.1");
-  Serial.println("echo: Last Updated: 2019-08-22 | Author: minusmagis");
+  Serial.println("echo: XZ carriage 0.0.2");
+  Serial.println("echo: Last Updated: 2020-06-03 | Author: minusmagis");
 }

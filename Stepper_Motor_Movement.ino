@@ -3,7 +3,7 @@ extern float currentPosXZ[];                           //Declare external variab
 extern float PosXZ[];
 extern int Feedrate;
 extern boolean AllowedPosition;
-int XaxisRange = 212;                                  //Declare the range of the x axis (in mm) from zero to the value
+int XaxisRange = 210;                                  //Declare the range of the x axis (in mm) from zero to the value
 int ZaxisRange = 122;                                  //Declare the range of the z axis (in mm) from zero to the value
 
 
