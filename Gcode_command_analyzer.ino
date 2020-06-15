@@ -21,7 +21,7 @@ void GcodeToInstructions(){
     }
     
   //Debugging_Serial_print();                           //Print position and other things for development purposes
-  Serial.println("ok");
+  //Serial.println("ok");
   newData = false;                                    //Set the newData flag false 
   } 
 }

@@ -13,6 +13,7 @@ boolean homez = false;
 boolean homex = false;
 
 void Home() {
+  Serial.println("Homing X");
 
   stepperZ.setSpeedInMillimetersPerSecond(ZhomingSpeedInMMPerSec*0.1);
   stepperX.setSpeedInMillimetersPerSecond(XhomingSpeedInMMPerSec*0.1);
@@ -22,6 +23,7 @@ void Home() {
   PosXZ[1] = 0;
   homex = stepperX.moveToHomeInMillimeters(directionTowardHomeX, XhomingSpeedInMMPerSec, XmaxHomingDistanceInMM, LIMIT_SWITCH_X_PIN);
   //delay(500);
+  Serial.println("Homing Z");
   homez = stepperZ.moveToHomeInMillimeters(directionTowardHomeZ, ZhomingSpeedInMMPerSec, ZmaxHomingDistanceInMM, LIMIT_SWITCH_Z_PIN);
   //delay(500);
   if (homez && homex){
