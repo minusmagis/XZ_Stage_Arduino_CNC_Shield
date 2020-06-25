@@ -20,6 +20,8 @@ void SetSteppersMovement() {                             //Function for moving t
 //            Serial.print(XZmove[0]);
 //            Serial.print(" Movement in the z position: ");
 //            Serial.println(XZmove[1]);                   //For development purposes
+    currentPosXZ[0] = PosXZ[0];
+    currentPosXZ[1] = PosXZ[1];
   }
 
   else {                                       //If the arm is in relative position movement use the coordinates as the moving vector
@@ -33,10 +35,11 @@ void SetSteppersMovement() {                             //Function for moving t
       //        Serial.print(" Movement in the z position: ");
       //        Serial.println(XZmove[1]);                   //For development purposes
     }
+    currentPosXZ[0] = currentPosXZ[0]+PosXZ[0];                               // The new position will be the one we were in plus the one we have added with the relative movement
+    currentPosXZ[1] = currentPosXZ[1]+PosXZ[1];
   }
   MoveSteppers(XZmove);
-  currentPosXZ[0] = PosXZ[0];
-  currentPosXZ[1] = PosXZ[1];
+
 }
 
 boolean PositionAllowed() {                                 //Check if the position to which the command tells the carriage to move is within the carriage range, and if so return true, otherwise return false
