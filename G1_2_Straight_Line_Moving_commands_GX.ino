@@ -75,3 +75,17 @@ void MovingCommand() {
       Serial.println("Coordinate out of range!");
     }
 }
+
+float Round_To_decimals (float To_Round,int decimals = 1)       // This function takes any float and rounds it to a certain number of decimals
+{
+  float Rounded = To_Round;
+   decimals = constrain(decimals, 0, 9);
+  for (int i = decimals; i>0;i--){
+    Rounded *= 10;
+  }
+  Rounded = round(Rounded);
+    for (int i = decimals; i>0;i--){
+    Rounded /= 10;
+  }
+  return Rounded;
+}
