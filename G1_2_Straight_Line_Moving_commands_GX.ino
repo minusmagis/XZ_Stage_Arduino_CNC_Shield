@@ -21,21 +21,21 @@ void MovingCommand() {
       switch (Command[i + 1]) {                           //The switch will read the letter immediately after the space which will indicate the attribute of this movement instruction
         case 'X':                                         //If the case is X it means we want to change the X position so we will scan the following numbers to know to which position we have to move
           {
-            PosXZ[0] = SubCommandExtractor(i).toFloat();
+            PosXZ[0] = Round_To_decimals(SubCommandExtractor(i).toFloat());
             //        Serial.println("X checked");                    //For development purposes
           }
           break;                                          //Break the loop to continue looking for other attributes
 
         case 'Z':                                         //If the case is Y it means we want to change the Y position so we will scan the following numbers to know to which position we have to move
           {
-            PosXZ[1] = SubCommandExtractor(i).toFloat();
+            PosXZ[1] = Round_To_decimals(SubCommandExtractor(i).toFloat());
             //        Serial.println("Z checked");                //For development purposes
           }
           break;                                           //Break the loop to continue looking for other attributes
 
         case 'F':                                         //If the case is Y it means we want to change the Y position so we will scan the following numbers to know to which position we have to move
           {
-            Feedrate = SubCommandExtractor(i).toFloat();
+            Feedrate = round(SubCommandExtractor(i).toFloat());
             //        Serial.println("F checked");                //For development purposes
           }
           break;
