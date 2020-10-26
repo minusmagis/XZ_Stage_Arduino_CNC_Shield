@@ -3,6 +3,7 @@ int Feedrate = 500;
 float currentPosXZ[] = {0,0};                   //The values at which the servos naturally start
 extern boolean AbsolutePos;
 
+<<<<<<< HEAD
 float Round_To_decimals (float To_Round,int decimals = 1)       // This function takes any float and rounds it to a certain number of decimals
 {
   float Rounded = To_Round;
@@ -16,6 +17,8 @@ float Round_To_decimals (float To_Round,int decimals = 1)       // This function
   }
   return Rounded;
 }
+=======
+>>>>>>> 9f2a556d65cb27a7e145e2c04857f2345d640d73
 
 void MovingCommand() {
   bool endMarker = false;                                 //Define a variable to break the for loop from inside a case structure
@@ -87,4 +90,21 @@ void MovingCommand() {
     else{
       Serial.println("Coordinate out of range!");
     }
+<<<<<<< HEAD
+=======
+}
+
+float Round_To_decimals (float To_Round,int decimals = 1)       // This function takes any float and rounds it to a certain number of decimals
+{
+  float Rounded = To_Round;
+   decimals = constrain(decimals, 0, 9);
+  for (int i = decimals; i>0;i--){
+    Rounded *= 10;
+  }
+  Rounded = round(Rounded);
+    for (int i = decimals; i>0;i--){
+    Rounded /= 10;
+  }
+  return Rounded;
+>>>>>>> 9f2a556d65cb27a7e145e2c04857f2345d640d73
 }
