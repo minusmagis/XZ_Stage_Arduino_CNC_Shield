@@ -60,6 +60,8 @@ String SubCommandExtractor(int i){
       break;                                    //Break the loop to stop looking for numbers
     }
   }
+//  Serial.print("Subcommand exractor = ");     //For development purposes
+//  Serial.println(temp);
   return temp;
 }
 

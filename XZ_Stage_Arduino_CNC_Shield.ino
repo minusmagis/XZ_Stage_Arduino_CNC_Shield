@@ -8,8 +8,8 @@ const int MOTOR_Z_DIR_PIN = 7;
 const int LIMIT_SWITCH_X_PIN = 9;
 const int LIMIT_SWITCH_Z_PIN = 11;
 
-extern int Xstepsmm;
-extern int Zstepsmm;
+extern float Xstepsmm;
+extern float Zstepsmm;
 extern int Xmmss;
 extern int Zmmss;
 

@@ -16,10 +16,10 @@ void SetSteppersMovement() {                             //Function for moving t
     for (int i = 0; i < 2; i++) {                   //Scan the PosXZ and calculate the distance between the desired position and the current position in each axis
       XZmove[i] = PosXZ[i] - currentPosXZ[i];     //Store the value of the direction vector
     }
-//            Serial.print("Movement in the x position: "); //For development purposes
-//            Serial.print(XZmove[0]);
-//            Serial.print(" Movement in the z position: ");
-//            Serial.println(XZmove[1]);                   //For development purposes
+                  Serial.print("Movement in the x position: "); //For development purposes
+                  Serial.print(XZmove[0]);
+                  Serial.print(" Movement in the z position: ");
+                  Serial.println(XZmove[1]);                   //For development purposes
     currentPosXZ[0] = PosXZ[0];
     currentPosXZ[1] = PosXZ[1];
   }
@@ -35,8 +35,8 @@ void SetSteppersMovement() {                             //Function for moving t
       //        Serial.print(" Movement in the z position: ");
       //        Serial.println(XZmove[1]);                   //For development purposes
     }
-    currentPosXZ[0] = currentPosXZ[0]+PosXZ[0];                               // The new position will be the one we were in plus the one we have added with the relative movement
-    currentPosXZ[1] = currentPosXZ[1]+PosXZ[1];
+    currentPosXZ[0] = currentPosXZ[0] + PosXZ[0];                             // The new position will be the one we were in plus the one we have added with the relative movement
+    currentPosXZ[1] = currentPosXZ[1] + PosXZ[1];
   }
   MoveSteppers(XZmove);
 
