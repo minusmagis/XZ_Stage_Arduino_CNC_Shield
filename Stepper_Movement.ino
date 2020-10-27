@@ -120,11 +120,11 @@ void moveXZWithCoordination(float stepsX, float stepsZ, float XspeedInStepsPerSe
 
   long Final_X_Steps = round(stepsX) * Xmotor_dir;                    // We need to round to convert to int to avoid truncation problems
   long Final_Z_Steps = round(stepsZ) * Zmotor_dir;
-
-  Serial.print("Steps X= ");
-  Serial.println(Final_X_Steps);
-  Serial.print("Steps Z= ");
-  Serial.println(Final_Z_Steps);
+//
+//  Serial.print("Steps X= ");
+//  Serial.println(Final_X_Steps);
+//  Serial.print("Steps Z= ");
+//  Serial.println(Final_Z_Steps);
 
   //
   // setup the motion for the X motor
