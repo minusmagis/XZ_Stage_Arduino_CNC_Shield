@@ -30,7 +30,7 @@ void setup() {
   stepperZ.setAccelerationInMillimetersPerSecondPerSecond(Zmmss);
 
   digitalWrite(STEPPERS_ENABLE_PIN, LOW);                // Enable the steppers
-  Serial.begin(115200);                                    // Begin Serial communication
+  Serial.begin(9600);                                    // Begin Serial communication
   StartCode();                                           // Send the startcode
 }
 
