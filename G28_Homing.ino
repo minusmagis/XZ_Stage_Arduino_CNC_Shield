@@ -2,7 +2,7 @@ extern float PosXZ[];                          //Define external variaables
 extern float currentPosXZ[];                           //Declare external variables for use in this part of the script
 extern boolean AbsolutePos;
 const float XhomingSpeedInMMPerSec = 80.0;   
-const float ZhomingSpeedInMMPerSec = 10.0; 
+const float ZhomingSpeedInMMPerSec = 5.0; 
 const float XmaxHomingDistanceInMM = 300;   // The axis is max 300 mm long so homing for a longer distance does not make sense
 const float ZmaxHomingDistanceInMM = 200;   // The axis is max 300 mm long so homing for a longer distance does not make sense
 const int directionTowardHomeX = -1;        // Direction to move toward limit switch: 1 goes positive direction, -1 backward

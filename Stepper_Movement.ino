@@ -9,9 +9,9 @@ extern const int LIMIT_SWITCH_Z_PIN;
 float Xstepsmm = 80;                                        //Define the steps per mm of the x axis
 float Zstepsmm = 400;                                       //Define the steps per mm of the z axis
 int XspeedinMMs = 200;                                     //Define the speed in mm/s for the x axis
-int ZspeedinMMs = 30;                                     //Define the speed in mm/s for the z axis
+int ZspeedinMMs = 15;                                     //Define the speed in mm/s for the z axis
 int Xmmss = 100;                                            //Define the acceleration in mm/s^2 for the x axis
-int Zmmss = 15;                                            //Define the acceleration in mm/s^2 for the z axis
+int Zmmss = 10;                                            //Define the acceleration in mm/s^2 for the z axis
 
 int Xmotor_dir = 1;                               // Invert the direction if the motor is plugged in reverse (1 is normau -1 is reversed)
 int Zmotor_dir = -1;
