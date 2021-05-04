@@ -14,9 +14,6 @@ boolean homex = false;
 
 void Home() {
   Serial.println("Homing X");
-
-  stepperZ.setSpeedInMillimetersPerSecond(ZhomingSpeedInMMPerSec*0.1);
-  stepperX.setSpeedInMillimetersPerSecond(XhomingSpeedInMMPerSec*0.1);
   
   AbsolutePos = true;                             //Set the absolute positioning to true to be able to go to the home position accurately (NOTE THAT IF ON RELATIVE MODE HOMING WILL OVERRIDE TO ABSOLUTE MODE)
   PosXZ[0] = 0;                                   //Set the position to the homing position and home the steppers
