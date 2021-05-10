@@ -1,4 +1,4 @@
-extern float PosXZ[2];
+extern float PosXYZ[3];
 extern char Command[];
 extern float Extruder;
 extern int Feedrate;
@@ -13,9 +13,11 @@ void Debugging_Serial_print(){
   Serial.print(Command[0]);
   Serial.println(CommandNumberExtractor());
   Serial.print("X Position = ");
-  Serial.println(PosXZ[0]);
+  Serial.println(PosXYZ[0]);
+  Serial.print("Y Position = ");
+  Serial.println(PosXYZ[1]);
   Serial.print("Z Position = ");
-  Serial.println(PosXZ[1]);
+  Serial.println(PosXYZ[2]);
   Serial.print("Feedrate = ");
   Serial.println(Feedrate);
   Serial.println("--------------------------------------------------");

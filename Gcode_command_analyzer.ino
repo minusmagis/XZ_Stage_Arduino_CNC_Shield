@@ -52,7 +52,7 @@ int CommandNumberExtractor(){                         //Function that extracts t
 }
 
 String SubCommandExtractor(int i){              
-  String temp;                                  //temp is a String that will contain the position temporally before writing it to PosXZ
+  String temp;                                  //temp is a String that will contain the position temporally before writing it to PosXYZ
   temp = String("");                            //The temp string is initialized empty to prevent weird information getting into the commands or getting mixed
   for (int j = i + 2; j < 64; j++) {            //Scan trhough the entire command (until another space or endline is found) after the X to read the position to which we have to move (i+2 because within a command we have for example G1 X23.44 where i == ' ' (the space) i+1 is the X and i+2 is where the number starts)
     temp += Command[j];                         //Store the numeric values in the string to be read afterwards

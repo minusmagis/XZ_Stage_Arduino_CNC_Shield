@@ -1,5 +1,5 @@
 void FirmwareCapabilities(){
-  Serial.println("FIRMWARE_NAME:XZ Nanopto Carriage 0.0.1 SOURCE_CODE_URL:None PROTOCOL_VERSION:0.0.1 MACHINE_TYPE:XZgeneric carriage EXTRUDER_COUNT:0 UUID:81d76328-00e2-4748-a4b1-51b557fc3725");
+  Serial.println("FIRMWARE_NAME:XYZ Nanopto Carriage 0.0.1 SOURCE_CODE_URL:None PROTOCOL_VERSION:0.0.1 MACHINE_TYPE:XYZgeneric carriage EXTRUDER_COUNT:0 UUID:81d76328-00e2-4748-a4b1-51b557fc3725");
   Serial.println("Cap:SERIAL_XON_XOFF:0");
   Serial.println("Cap:EEPROM:0");
   Serial.println("Cap:VOLUMETRIC:0");

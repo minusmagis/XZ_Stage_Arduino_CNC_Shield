@@ -1,6 +1,6 @@
-float PosXZ[] = {0,0};
+float PosXYZ[] = {0,0,0};
 int Feedrate = 500;
-float currentPosXZ[] = {0,0};                   //The values at which the servos naturally start
+float currentPosXYZ[] = {0,0,0};                   //The values at which the servos naturally start
 extern boolean AbsolutePos;
 
 float Round_To_decimals (float To_Round,int decimals = 1)       // This function takes any float and rounds it to a certain number of decimals
@@ -21,13 +21,13 @@ float Round_To_decimals (float To_Round,int decimals = 1)       // This function
 void MovingCommand() {
   bool endMarker = false;                                 //Define a variable to break the for loop from inside a case structure
   if (AbsolutePos == false) {
-    for (int v = 0; v < 2; v++) {                           //Reinitialize the value of desired position before reading the new desired value
-      PosXZ[v] = 0;
+    for (int v = 0; v < 3; v++) {                           //Reinitialize the value of desired position before reading the new desired value
+      PosXYZ[v] = 0;
     }
   }
   else{
-    for (int v = 0; v < 2; v++) {                           //Reinitialize the value of desired position before reading the new desired value
-      PosXZ[v] = currentPosXZ[v];
+    for (int v = 0; v < 3; v++) {                           //Reinitialize the value of desired position before reading the new desired value
+      PosXYZ[v] = currentPosXYZ[v];
     }
   }
   for (int i = 0; i < 64; i++) {                          //Read the entire command in search for the attributes of the movement such as position velocity or if the laser should be on or off
@@ -35,14 +35,21 @@ void MovingCommand() {
       switch (Command[i + 1]) {                           //The switch will read the letter immediately after the space which will indicate the attribute of this movement instruction
         case 'X':                                         //If the case is X it means we want to change the X position so we will scan the following numbers to know to which position we have to move
           {
-            PosXZ[0] = Round_To_decimals(SubCommandExtractor(i).toFloat());
+            PosXYZ[0] = Round_To_decimals(SubCommandExtractor(i).toFloat());
+            //        Serial.println("X checked");                    //For development purposes
+          }
+          break;                                          //Break the loop to continue looking for other attributes
+
+        case 'Y':                                         //If the case is X it means we want to change the X position so we will scan the following numbers to know to which position we have to move
+          {
+            PosXYZ[1] = Round_To_decimals(SubCommandExtractor(i).toFloat());
             //        Serial.println("X checked");                    //For development purposes
           }
           break;                                          //Break the loop to continue looking for other attributes
 
         case 'Z':                                         //If the case is Y it means we want to change the Y position so we will scan the following numbers to know to which position we have to move
           {
-            PosXZ[1] = Round_To_decimals(SubCommandExtractor(i).toFloat());
+            PosXYZ[2] = Round_To_decimals(SubCommandExtractor(i).toFloat());
             //        Serial.println("Z checked");                //For development purposes
           }
           break;                                           //Break the loop to continue looking for other attributes
@@ -58,15 +65,15 @@ void MovingCommand() {
           endMarker = true;                               //Set the endmarker flag to true to stop the loop
           break;
 
-        case '\n':                                         //If the case is ;
+        case '\n':                                         //If the case is \n
           endMarker = true;                               //Set the endmarker flag to true to stop the loop
           break;
 
-        case '\0':                                         //If the case is ;
+        case '\0':                                         //If the case is \0
           endMarker = true;                               //Set the endmarker flag to true to stop the loop
           break;
 
-        case ' ':                                         //If the case is ;
+        case ' ':                                         //If the case is ' '
           endMarker = true;                               //Set the endmarker flag to true to stop the loop
           break;
 

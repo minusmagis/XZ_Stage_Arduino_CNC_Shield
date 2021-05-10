@@ -1,61 +1,77 @@
 extern const int STEPPERS_ENABLE_PIN;
 extern const int MOTOR_X_STEP_PIN;
+extern const int MOTOR_Y_STEP_PIN;
 extern const int MOTOR_Z_STEP_PIN;
 extern const int MOTOR_X_DIR_PIN;
+extern const int MOTOR_Y_DIR_PIN;
 extern const int MOTOR_Z_DIR_PIN;
 extern const int LIMIT_SWITCH_X_PIN;
+extern const int LIMIT_SWITCH_Y_PIN;
 extern const int LIMIT_SWITCH_Z_PIN;
 
 float Xstepsmm = 80;                                        //Define the steps per mm of the x axis
+float Ystepsmm = 80;                                        //Define the steps per mm of the Y axis
 float Zstepsmm = 400;                                       //Define the steps per mm of the z axis
 int XspeedinMMs = 200;                                     //Define the speed in mm/s for the x axis
+int YspeedinMMs = 200;                                     //Define the speed in mm/s for the y axis
 int ZspeedinMMs = 15;                                     //Define the speed in mm/s for the z axis
 int Xmmss = 100;                                            //Define the acceleration in mm/s^2 for the x axis
+int Ymmss = 100;                                            //Define the acceleration in mm/s^2 for the y axis
 int Zmmss = 10;                                            //Define the acceleration in mm/s^2 for the z axis
 
 int Xmotor_dir = 1;                               // Invert the direction if the motor is plugged in reverse (1 is normau -1 is reversed)
+int Ymotor_dir = 1;
 int Zmotor_dir = -1;
 
 float XStepsPerSecond = Xstepsmm * XspeedinMMs;                                       //in steps per second (has to be calibrated)
+float YStepsPerSecond = Ystepsmm * YspeedinMMs;                                       //in steps per second (has to be calibrated)
 float ZStepsPerSecond = Zstepsmm * ZspeedinMMs;                                       //in steps per second (has to be calibrated)
 float XStepsPerSecondPerSecond = Xstepsmm * Xmmss;                              //in steps per second per second (has to be calibrated)
+float YStepsPerSecondPerSecond = Ystepsmm * Ymmss;                              //in steps per second per second (has to be calibrated)
 float ZStepsPerSecondPerSecond = Zstepsmm * Zmmss;                              //in steps per second per second (has to be calibrated)
 
-void MoveSteppers(float XZmove[]) {
-  float stepsX = XZmove[0] * Xstepsmm;
-  //  Serial.print(XZmove[0]);                                      // For Development purposes DO NOT USE LONG OR ANYTHING OTHER THAN FLOAT
+void MoveSteppers(float XYZmove[]) {
+  float stepsX = XYZmove[0] * Xstepsmm;
+  //  Serial.print(XYZmove[0]);                                      // For Development purposes DO NOT USE LONG OR ANYTHING OTHER THAN FLOAT
   //  Serial.print(" * ");
   //  Serial.print(Xstepsmm);
   //  Serial.print(" = ");
   //  Serial.print(stepsX);
   //  Serial.println(" X steps Calculated");
-  float stepsZ = XZmove[1] * Zstepsmm;
-  //  Serial.print(XZmove[1]);
+  float stepsY = XYZmove[1] * Ystepsmm;
+  //  Serial.print(XYZmove[1]);                                      // For Development purposes DO NOT USE LONG OR ANYTHING OTHER THAN FLOAT
+  //  Serial.print(" * ");
+  //  Serial.print(Xstepsmm);
+  //  Serial.print(" = ");
+  //  Serial.print(stepsX);
+  //  Serial.println(" X steps Calculated");
+  float stepsZ = XYZmove[2] * Zstepsmm;
+  //  Serial.print(XYZmove[2]);
   //  Serial.print(" * ");
   //  Serial.print(Zstepsmm);
   //  Serial.print(" = ");
   //  Serial.print(stepsZ);
   //  Serial.println(" Z steps Calculated");
-  moveXZWithCoordination(stepsX, stepsZ, XStepsPerSecond, ZStepsPerSecond, XStepsPerSecondPerSecond, ZStepsPerSecondPerSecond);
+  moveXYZWithCoordination(stepsX, stepsY, stepsZ, XStepsPerSecond, YStepsPerSecond, ZStepsPerSecond, XStepsPerSecondPerSecond, YStepsPerSecondPerSecond, ZStepsPerSecondPerSecond);
 }
 
-void moveXZWithCoordination(float stepsX, float stepsZ, float XspeedInStepsPerSecond, float ZspeedInStepsPerSecond, float XaccelerationInStepsPerSecondPerSecond, float ZaccelerationInStepsPerSecondPerSecond)
+void moveXYZWithCoordination(float stepsX, float stepsY, float stepsZ, float XspeedInStepsPerSecond, float YspeedInStepsPerSecond, float ZspeedInStepsPerSecond, float XaccelerationInStepsPerSecondPerSecond, float YaccelerationInStepsPerSecondPerSecond, float ZaccelerationInStepsPerSecondPerSecond)
 {
-  float speedInStepsPerSecond_X;
-  float accelerationInStepsPerSecondPerSecond_X;
-  float speedInStepsPerSecond_Z;
-  float accelerationInStepsPerSecondPerSecond_Z;
-  float absStepsX;
-  float absStepsZ;
+  float speedInStepsPerSecond_array[] = {0,0,0};
+  float accelerationInStepsPerSecondPerSecond_array[] = {0,0,0};
+  float absStepsXYZ[] = {0,0,0};
 
   //
   // setup initial speed and acceleration values
   //
-  speedInStepsPerSecond_X = XspeedInStepsPerSecond;
-  accelerationInStepsPerSecondPerSecond_X = XaccelerationInStepsPerSecondPerSecond;
+  speedInStepsPerSecond_array[0] = XspeedInStepsPerSecond;
+  accelerationInStepsPerSecondPerSecond_array[0] = XaccelerationInStepsPerSecondPerSecond;
 
-  speedInStepsPerSecond_Z = ZspeedInStepsPerSecond;
-  accelerationInStepsPerSecondPerSecond_Z = ZaccelerationInStepsPerSecondPerSecond;
+  speedInStepsPerSecond_array[1] = YspeedInStepsPerSecond;
+  accelerationInStepsPerSecondPerSecond_array[1] = YaccelerationInStepsPerSecondPerSecond;
+
+  speedInStepsPerSecond_array[2] = ZspeedInStepsPerSecond;
+  accelerationInStepsPerSecondPerSecond_array[2] = ZaccelerationInStepsPerSecondPerSecond;
 
   //  Serial.print("speedInStepsPerSecond_X = ");
   //  Serial.println(speedInStepsPerSecond_X);
@@ -71,15 +87,21 @@ void moveXZWithCoordination(float stepsX, float stepsZ, float XspeedInStepsPerSe
   //
   // determine how many steps each motor is moving
   //
+
   if (stepsX >= 0)
-    absStepsX = stepsX;
+    absStepsXYZ[0] = stepsX;
   else
-    absStepsX = -stepsX;
+    absStepsXYZ[0] = -stepsX;
+
+  if (stepsY >= 0)
+    absStepsXYZ[1] = stepsY;
+  else
+    absStepsXYZ[1] = -stepsY;
 
   if (stepsZ >= 0)
-    absStepsZ = stepsZ;
+    absStepsXYZ[2] = stepsZ;
   else
-    absStepsZ = -stepsZ;
+    absStepsXYZ[2] = -stepsZ;
 
   //  Serial.print("speedInStepsPerSecond_X = ");
   //  Serial.println(speedInStepsPerSecond_X);
@@ -98,47 +120,49 @@ void moveXZWithCoordination(float stepsX, float stepsZ, float XspeedInStepsPerSe
   // determine which motor is traveling the farthest, then slow down the
   // speed rates for the motor moving the shortest distance
   //
-  if ((absStepsX > absStepsZ) && (stepsX != 0))
-  {
-    //
-    // slow down the motor traveling less far
-    //
-    float scaler = (float) absStepsZ / (float) absStepsX;
-    speedInStepsPerSecond_Z = speedInStepsPerSecond_Z * scaler;
-    accelerationInStepsPerSecondPerSecond_Z = accelerationInStepsPerSecondPerSecond_Z * scaler;
+
+  float Biggest_Move = 0;
+  for (int k = 0;  k > 3; k++ ){
+    if (absStepsXYZ[k] > Biggest_Move){
+      Biggest_Move = absStepsXYZ[k];
+    }
   }
 
-  if ((absStepsZ > absStepsX) && (stepsZ != 0))
-  {
-    //
-    // slow down the motor traveling less far
-    //
-    float scaler = (float) absStepsX / (float) absStepsZ;
-    speedInStepsPerSecond_X = speedInStepsPerSecond_X * scaler;
-    accelerationInStepsPerSecondPerSecond_X = accelerationInStepsPerSecondPerSecond_X * scaler;
+  for (int k = 0;  k > 3;k++ ){
+    float scaler = (float) absStepsXYZ[k] / (float) Biggest_Move;
+    speedInStepsPerSecond_array[k] = speedInStepsPerSecond_array[k] * scaler;
+    accelerationInStepsPerSecondPerSecond_array[k] = accelerationInStepsPerSecondPerSecond_array[k] * scaler;
   }
+
 
   long Final_X_Steps = round(stepsX) * Xmotor_dir;                    // We need to round to convert to int to avoid truncation problems
+  long Final_Y_Steps = round(stepsY) * Ymotor_dir;
   long Final_Z_Steps = round(stepsZ) * Zmotor_dir;
-//
-//  Serial.print("Steps X= ");
-//  Serial.println(Final_X_Steps);
-//  Serial.print("Steps Z= ");
-//  Serial.println(Final_Z_Steps);
+ //
+ //  Serial.print("Steps X= ");
+ //  Serial.println(Final_X_Steps);
+ //  Serial.print("Steps Z= ");
+ //  Serial.println(Final_Z_Steps);
 
   //
   // setup the motion for the X motor
   //
-  stepperX.setSpeedInStepsPerSecond(speedInStepsPerSecond_X);
-  stepperX.setAccelerationInStepsPerSecondPerSecond(accelerationInStepsPerSecondPerSecond_X);
+  stepperX.setSpeedInStepsPerSecond(speedInStepsPerSecond_array[0]);
+  stepperX.setAccelerationInStepsPerSecondPerSecond(accelerationInStepsPerSecondPerSecond_array[0]);
   stepperX.setupRelativeMoveInSteps(Final_X_Steps);
 
+  //
+  // setup the motion for the Y motor
+  //
+  stepperY.setSpeedInStepsPerSecond(speedInStepsPerSecond_array[1]);
+  stepperY.setAccelerationInStepsPerSecondPerSecond(accelerationInStepsPerSecondPerSecond_array[1]);
+  stepperY.setupRelativeMoveInSteps(Final_Y_Steps);
 
   //
   // setup the motion for the Z motor
   //
-  stepperZ.setSpeedInStepsPerSecond(speedInStepsPerSecond_Z);
-  stepperZ.setAccelerationInStepsPerSecondPerSecond(accelerationInStepsPerSecondPerSecond_Z);
+  stepperZ.setSpeedInStepsPerSecond(speedInStepsPerSecond_array[2]);
+  stepperZ.setAccelerationInStepsPerSecondPerSecond(accelerationInStepsPerSecondPerSecond_array[2]);
   stepperZ.setupRelativeMoveInSteps(Final_Z_Steps);
 
   //  Serial.print("speedInStepsPerSecond_X = ");
@@ -160,9 +184,10 @@ void moveXZWithCoordination(float stepsX, float stepsZ, float XspeedInStepsPerSe
   //
   // now execute the moves, looping until both motors have finished
   //
-  while ((!stepperX.motionComplete()) || (!stepperZ.motionComplete()))
+  while ((!stepperX.motionComplete()) || (!stepperY.motionComplete()) || (!stepperZ.motionComplete()))
   {
     stepperX.processMovement();
+    stepperY.processMovement();
     stepperZ.processMovement();
   }
   Serial.println("Moved");

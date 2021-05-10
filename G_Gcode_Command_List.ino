@@ -1,5 +1,5 @@
 boolean AbsolutePos = true;
-extern float PosXZ[];
+extern float PosXYZ[];
 
 void GGcode(){                                  //Function that runs in the event of a GXX command (G1 or G0)
 //  Serial.println("G Checked");                //For development purposes
