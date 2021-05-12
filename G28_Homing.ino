@@ -17,13 +17,16 @@ boolean homez = false;
 boolean homey = false;
 boolean homex = false;
 
-void Home() {
-  Serial.println("Homing X");
-  
+void Home() {  
   AbsolutePos = true;                              //Set the absolute positioning to true to be able to go to the home position accurately (NOTE THAT IF ON RELATIVE MODE HOMING WILL OVERRIDE TO ABSOLUTE MODE)
   PosXYZ[0] = 0;                                   //Set the position to the homing position and home the steppers
   PosXYZ[1] = 0;
   PosXYZ[2] = 0;
+  
+  Serial.println("Homing Y");
+  homey = stepperY.moveToHomeInMillimeters(directionTowardHomeY, YhomingSpeedInMMPerSec, YmaxHomingDistanceInMM, LIMIT_SWITCH_Y_PIN);
+  //delay(500);
+  
   Serial.println("Homing X");
   homex = stepperX.moveToHomeInMillimeters(directionTowardHomeX, XhomingSpeedInMMPerSec, XmaxHomingDistanceInMM, LIMIT_SWITCH_X_PIN);
   Serial.println("Homing Y");
