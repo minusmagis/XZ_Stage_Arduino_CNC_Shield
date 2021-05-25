@@ -30,13 +30,13 @@ void setup() {
   pinMode(LIMIT_SWITCH_Z_PIN, INPUT_PULLUP);
 
   stepperX.connectToPins(MOTOR_X_STEP_PIN, MOTOR_X_DIR_PIN);        //Initialize the motors
-  stepperX.connectToPins(MOTOR_Y_STEP_PIN, MOTOR_Y_DIR_PIN);        //Initialize the motors
+  stepperY.connectToPins(MOTOR_Y_STEP_PIN, MOTOR_Y_DIR_PIN);        //Initialize the motors
   stepperZ.connectToPins(MOTOR_Z_STEP_PIN, MOTOR_Z_DIR_PIN);        //Initialize the motors
   stepperX.setStepsPerMillimeter(Xstepsmm);
-  stepperX.setStepsPerMillimeter(Ystepsmm);
+  stepperY.setStepsPerMillimeter(Ystepsmm);
   stepperZ.setStepsPerMillimeter(Zstepsmm);
   stepperX.setAccelerationInMillimetersPerSecondPerSecond(Xmmss);
-  stepperY.setAccelerationInMillimetersPerSecondPerSecond(Xmmss);
+  stepperY.setAccelerationInMillimetersPerSecondPerSecond(Ymmss);
   stepperZ.setAccelerationInMillimetersPerSecondPerSecond(Zmmss);
 
   digitalWrite(STEPPERS_ENABLE_PIN, LOW);                // Enable the steppers

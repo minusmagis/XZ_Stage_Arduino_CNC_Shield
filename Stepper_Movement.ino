@@ -10,18 +10,18 @@ extern const int LIMIT_SWITCH_Y_PIN;
 extern const int LIMIT_SWITCH_Z_PIN;
 
 float Xstepsmm = 80;                                        //Define the steps per mm of the x axis
-float Ystepsmm = 80;                                        //Define the steps per mm of the Y axis
+float Ystepsmm = 400;                                        //Define the steps per mm of the Y axis
 float Zstepsmm = 400;                                       //Define the steps per mm of the z axis
-int XspeedinMMs = 200;                                     //Define the speed in mm/s for the x axis
-int YspeedinMMs = 200;                                     //Define the speed in mm/s for the y axis
-int ZspeedinMMs = 15;                                     //Define the speed in mm/s for the z axis
+int XspeedinMMs = 100;                                     //Define the speed in mm/s for the x axis
+int YspeedinMMs = 8;                                     //Define the speed in mm/s for the y axis
+int ZspeedinMMs = 12;                                     //Define the speed in mm/s for the z axis
 int Xmmss = 100;                                            //Define the acceleration in mm/s^2 for the x axis
-int Ymmss = 100;                                            //Define the acceleration in mm/s^2 for the y axis
+int Ymmss = 10;                                            //Define the acceleration in mm/s^2 for the y axis
 int Zmmss = 10;                                            //Define the acceleration in mm/s^2 for the z axis
 
-int Xmotor_dir = 1;                               // Invert the direction if the motor is plugged in reverse (1 is normau -1 is reversed)
+int Xmotor_dir = -1;                               // Invert the direction if the motor is plugged in reverse (1 is normau -1 is reversed)
 int Ymotor_dir = 1;
-int Zmotor_dir = -1;
+int Zmotor_dir = 1;
 
 float XStepsPerSecond = Xstepsmm * XspeedinMMs;                                       //in steps per second (has to be calibrated)
 float YStepsPerSecond = Ystepsmm * YspeedinMMs;                                       //in steps per second (has to be calibrated)
@@ -138,11 +138,13 @@ void moveXYZWithCoordination(float stepsX, float stepsY, float stepsZ, float Xsp
   long Final_X_Steps = round(stepsX) * Xmotor_dir;                    // We need to round to convert to int to avoid truncation problems
   long Final_Y_Steps = round(stepsY) * Ymotor_dir;
   long Final_Z_Steps = round(stepsZ) * Zmotor_dir;
- //
- //  Serial.print("Steps X= ");
- //  Serial.println(Final_X_Steps);
- //  Serial.print("Steps Z= ");
- //  Serial.println(Final_Z_Steps);
+
+//   Serial.print("Steps X= ");
+//   Serial.println(Final_X_Steps);
+//   Serial.print("Steps Y= ");
+//   Serial.println(Final_Y_Steps);
+//   Serial.print("Steps Z= ");
+//   Serial.println(Final_Z_Steps);
 
   //
   // setup the motion for the X motor

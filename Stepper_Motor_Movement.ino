@@ -4,8 +4,8 @@ extern float PosXYZ[];
 extern int Feedrate;
 extern boolean AllowedPosition;
 int XaxisRange = 210;                                  //Declare the range of the x axis (in mm) from zero to the value
-int YaxisRange = 50;                                  //Declare the range of the y axis (in mm) from zero to the value
-int ZaxisRange = 122;                                  //Declare the range of the z axis (in mm) from zero to the value
+int YaxisRange = 48;                                  //Declare the range of the y axis (in mm) from zero to the value
+int ZaxisRange = 115;                                  //Declare the range of the z axis (in mm) from zero to the value
 
 
 void SetSteppersMovement() {                             //Function for moving the steppers around sinchronously

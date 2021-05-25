@@ -36,21 +36,21 @@ void MovingCommand() {
         case 'X':                                         //If the case is X it means we want to change the X position so we will scan the following numbers to know to which position we have to move
           {
             PosXYZ[0] = Round_To_decimals(SubCommandExtractor(i).toFloat());
-            //        Serial.println("X checked");                    //For development purposes
+//                    Serial.println("X checked");                    //For development purposes
           }
           break;                                          //Break the loop to continue looking for other attributes
 
         case 'Y':                                         //If the case is X it means we want to change the X position so we will scan the following numbers to know to which position we have to move
           {
             PosXYZ[1] = Round_To_decimals(SubCommandExtractor(i).toFloat());
-            //        Serial.println("X checked");                    //For development purposes
+//                    Serial.println("Y checked");                    //For development purposes
           }
           break;                                          //Break the loop to continue looking for other attributes
 
         case 'Z':                                         //If the case is Y it means we want to change the Y position so we will scan the following numbers to know to which position we have to move
           {
             PosXYZ[2] = Round_To_decimals(SubCommandExtractor(i).toFloat());
-            //        Serial.println("Z checked");                //For development purposes
+//                    Serial.println("Z checked");                //For development purposes
           }
           break;                                           //Break the loop to continue looking for other attributes
 
